@@ -1,19 +1,21 @@
 #!/bin/bash
 
-echo -e "Installing Applications:\n\tVim\n\tGit"
+echo -e "Installing Applications:\n\tVim\n\tGit\nDocker"
 for a in {1..35}; do echo -n =; done
 echo -e "\n"  
-apt install -y vim git
+sudo apt install -y vim git docker
 
 
 echo -e "\nGenerating Symbolic Links:"
 for a in {1..35}; do echo -n =; done
 
 echo -e "\n======= Vimrc Link ======="
-ln -s $(pwd)/.vimrc ~/.vimrc
+ln -s ~/.dotfile/.vimrc ~/.vimrc
 
 echo -e "======= Bashrc Link ======="
-ln -s $(pwd)/.bashrc ~/.bashrc
+ln -s ~/.dotfile/.bashrc ~/.bashrc
 
 echo -e "======= Git Config Link ======="
-ln -s $(pwd)/.gitconfig ~/.gitconfig
+ln -s ~/.dotfile/.gitconfig ~/.gitconfig
+
+source ~/.bashrc

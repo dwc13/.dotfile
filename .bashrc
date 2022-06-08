@@ -162,5 +162,6 @@ alias of="nautilus $@ &"
 # alias bud="sudo tar -cvpzf /mnt/big-drive/backup-$(date +%d-%m-%y).tar.gz --one-file-system /mnt/nvme-drive"
 # alias rest="sudo tar -xvpzf $@ -C /mnt/nvme-drive --numeric-owner" 
 alias note="vim ./$(date +%d-%m-%y)-notes.md"
-
+alias stat="git status"
+alias gc="git commit -m "$1""
 
