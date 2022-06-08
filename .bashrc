@@ -164,4 +164,7 @@ alias of="nautilus $@ &"
 alias note="vim ./$(date +%d-%m-%y)-notes.md"
 alias stat="git status"
 alias gc="git commit -m "$1""
+alias gl="git log --reverse"
+
+
 

@@ -21,6 +21,8 @@ set nohls
 set noeb
 set vb
 set showcmd
+set scrolloff=8
+set nuw=6
 
 " Maps
 "=========================
