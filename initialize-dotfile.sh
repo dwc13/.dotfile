@@ -1,12 +1,17 @@
 #!/bin/bash
 
-echo -e "Installing Applications:\n\tVim\n\tDocker"
+# echo -e "Installing Applications:\n\tVim"
+echo -e "Updating System\n"
 for a in {1..35}; do echo -n =; done
 echo -e "\n"
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
-sudo apt install -y vim docker
+# sudo apt install -y vim
+
+echo "Install Docker Desktop by going to https://docs.docker.com/desktop/linux/install/ubuntu/"
+echo -e "\tMake sure to install Docker's package repository and install latest release."
+echo "Install Kasm by going to https://kasmweb.com/docs/latest/install.html"
 
 # Install Flatpak
 # apt install -y flatpak
