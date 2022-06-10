@@ -135,6 +135,10 @@ brk='\[\e[1;33m\]'
 
 LS_COLORS=$LS_COLORS:'di=1;32:fi=0;36:ln=0;97:' ; export LS_COLORS
 
+neofetch
+echo -e "\n=============================================\n"
+echo -e "\tIPs: $(hostname -i)"
+
 PS1="$brk\n=============================================\n$tc
 $tc[\A] $txtgrn\u$tc: $txtcyn\w$tc $ "
 
@@ -145,6 +149,19 @@ $tc[\A] $txtgrn\u$tc: $txtcyn\w$tc $ "
 function mkcd () {
 	mkdir -p $1 && cd $1
 }
+
+#=====================================================================
+#		 SOURCE	
+#=====================================================================
+
+CODENAME=$(lsb_release -cs)
+echo -e "\tCurrent Distribution: $CODENAME"
+if [ "$CODENAME" == 'melodic' ]; then
+	echo -e "\tSourcing ROS Melodic"
+	source /opt/ros/melodic/setup.bash
+else
+	echo -e "\tDid not source ROS for $CODENAME"
+fi
 
 #=====================================================================
 #			EXPORTS	
