@@ -156,7 +156,7 @@ function mkcd () {
 
 CODENAME=$(lsb_release -cs)
 echo -e "\tCurrent Distribution: $CODENAME"
-if [ "$CODENAME" == 'melodic' ]; then
+if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
 	echo -e "\tSourcing ROS Melodic"
 	source /opt/ros/melodic/setup.bash
 else
