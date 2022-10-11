@@ -42,9 +42,11 @@ let g:vimwiki_list = [{'path': '~/dwc-notes', 'template_path': '~/dwc-notes/temp
 " Syntax
 "=========================
 set nowrap
-set tabstop=2
-set sw=2
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
 set autoindent
+set expandtab
 
 " Visual
 "=========================
