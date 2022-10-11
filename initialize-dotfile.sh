@@ -3,14 +3,24 @@
 # echo -e "Installing Applications:\n\tVim"
 echo -e "Updating System\n"
 for a in {1..35}; do echo -n =; done
-echo -e "\n"
+
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo apt install -y vim ruby-full build-essential zlib1g-dev
 
-gem install vimwiki_markdown jekyll bundler
+echo -e "\n"
+echo -e "Install GEMs"
+for a in {1..35}; do echo -n =; done
+gem install -V vimwiki_markdown jekyll bundler
 
+echo -e "\n"
+echo -e "Grabbing vim-plug"
+for a in {1..35}; do echo -n =; done
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+echo -e "\n"
 echo "Install Docker Desktop by going to https://docs.docker.com/desktop/linux/install/ubuntu/"
 echo -e "\tMake sure to install Docker's package repository and install latest release."
 echo "Install Kasm by going to https://kasmweb.com/docs/latest/install.html"
