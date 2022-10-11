@@ -7,7 +7,9 @@ echo -e "\n"
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
-# sudo apt install -y vim
+sudo apt install -y vim ruby-full build-essential zlib1g-dev
+
+gem install vimwiki_markdown jekyll bundler
 
 echo "Install Docker Desktop by going to https://docs.docker.com/desktop/linux/install/ubuntu/"
 echo -e "\tMake sure to install Docker's package repository and install latest release."

@@ -137,7 +137,7 @@ LS_COLORS=$LS_COLORS:'di=1;32:fi=0;36:ln=0;97:' ; export LS_COLORS
 
 neofetch
 echo -e "\n=============================================\n"
-echo -e "\tIPs: $(hostname -i)"
+echo -e "\tIPs: $(hostname -I)"
 
 PS1="$brk\n=============================================\n$tc
 $tc[\A] $txtgrn\u$tc: $txtcyn\w$tc $ "
@@ -182,6 +182,7 @@ alias note="vim ./$(date +%d-%m-%y)-notes.md"
 alias stat="git status"
 alias gc="git commit -m "$1""
 alias gl="git log --reverse"
+alias py="python $@"
 
 
 
