@@ -6,27 +6,28 @@ for a in {1..35}; do echo -n =; done
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
-sudo apt install -y vim ruby-full build-essential zlib1g-dev
+sudo apt install -y vim ruby-full build-essential zlib1g-dev neofetch
 
 for a in {1..35}; do echo -n =; done
+echo -e "\nInstalling GEMs -> vimwiki_markdown jekyll bundler"
+sudo gem install --silent vimwiki_markdown jekyll bundler
 
-echo -e "\n"
-echo -e "!!!!!!!NOTICE!!!!!!!"
 for a in {1..35}; do echo -n =; done
-echo -e "\nInstall GEMs -> gem install -V vimwiki_markdown jekyll bundler"
-echo -e "\n"
-echo -e "Run curl for vim-plug -> curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-echo -e "\n"
-echo "Install Docker Desktop by going to https://docs.docker.com/desktop/linux/install/ubuntu/"
+echo -e "\nRunning curl for vim-plug, make sure to run :PlugInstall in vim\n"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+for a in {1..35}; do echo -n =; done
+echo -e "\nInstall Docker Desktop by going to https://docs.docker.com/desktop/linux/install/ubuntu/"
 echo -e "\tMake sure to install Docker's package repository and install latest release."
 echo "Install Kasm by going to https://kasmweb.com/docs/latest/install.html"
-for a in {1..35}; do echo -n =; done
 
 # Install Flatpak
+# for a in {1..35}; do echo -n =; done
+# echo "\nInstalling flatpak with flathub remote"
 # apt install -y flatpak
 # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-echo -e "\n"
+for a in {1..35}; do echo -n =; done
 echo -e "\nGenerating Symbolic Links:"
 for a in {1..35}; do echo -n =; done
 

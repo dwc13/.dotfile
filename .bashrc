@@ -147,7 +147,7 @@ $tc[\A] $txtgrn\u$tc: $txtcyn\w$tc $ "
 #=====================================================================
 
 CODENAME=$(lsb_release -cs)
-echo -e "\tCurrent Distribution: $CODENAME"
+# echo -e "\tCurrent Distribution: $CODENAME"
 if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
 	echo -e "\tSourcing ROS Melodic"
 	source /opt/ros/melodic/setup.bash
@@ -201,15 +201,15 @@ function mkcd () {
 # alias wsl-pdf="fire file://///wsl$/Ubuntu-22.04/home/dom/"$1""
 # alias wsl-pdf="fire file://///wsl$/Ubuntu-22.04/$(ppwd)/"$1""
 function wsl-pdf () {
-    echo "Attempting to open file in Windows Firefox: path > file://///wsl$/Ubuntu-22.04$(ppwd)/$1"
-    $(fire file://///wsl$/Ubuntu-22.04/$(ppwd)/$1)
+    echo "Attempting to open file in Windows Firefox: path > file://///wsl$/Ubuntu-$(lsb_release -rs)$(ppwd)/$1"
+    $(fire file://///wsl$/Ubuntu-$(lsb_release -rs)/$(ppwd)/$1)
 }
 
 # To Open Notes in Window's Firefox
 # alias wnotes="cd ~/dwc-notes/site_html && falkon ./index.html &"
 # alias wnotes="cd ~/dwc-notes/site_html && /mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe $(ppwd)/index.html"
 function wnotes () {
-    echo "Attempting to open notes in Window's Firefox.\nPath > file://///wsl$/Ubuntu-22.04/home/dom/dwc-notes/site_html/index.html"
-    $(fire file://///wsl$/Ubuntu-22.04/home/dom/dwc-notes/site_html/index.html)
+    echo "Attempting to open notes in Window's Firefox.\nPath > file://///wsl$/Ubuntu-$(lsb_release -rs)/home/dom/dwc-notes/site_html/index.html"
+    $(fire file://///wsl$/Ubuntu-$(lsb_release -rs)/home/dom/dwc-notes/site_html/index.html)
 }
 
