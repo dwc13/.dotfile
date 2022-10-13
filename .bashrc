@@ -148,9 +148,12 @@ $tc[\A] $txtgrn\u$tc: $txtcyn\w$tc $ "
 
 CODENAME=$(lsb_release -cs)
 # echo -e "\tCurrent Distribution: $CODENAME"
-if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
+if [ "$CODENAME" == 'bionic' ]; then
 	echo -e "\tSourcing ROS Melodic"
 	source /opt/ros/melodic/setup.bash
+elif [ "$CODENAME" == 'focal' ]; then
+	echo -e "\tSourcing ROS Noetic"
+	source /opt/ros/noetic/setup.bash
 else
 	echo -e "\tDid not source ROS for $CODENAME"
 fi
