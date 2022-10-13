@@ -21,45 +21,6 @@ colorscheme elflord
 let g:airline_theme='murmur'
 "let g:airline_theme='simple'
 
-" Command line
-"=========================
-set wmnu " wildmenu
-
-" vimwiki 
-set nocompatible
-filetype plugin on
-syntax on"
-"    :Vimwiki2HTML -- Convert current wiki link to HTML.
-"    :VimwikiAll2HTML -- Convert all your wiki links to HTML.
-"    :help vimwiki-commands -- List all commands.
-"    :help vimwiki -- General vimwiki help docs.
-let g:vimwiki_list = [{'path': '~/dwc-notes', 'template_path': '~/dwc-notes/templates/',
-          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.md',
-          \ 'path_html': '~/dwc-notes/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
-          \ 'html_filename_parameterization': 1,
-          \ 'template_ext': '.tpl'}]
-
-" Syntax
-"=========================
-set nowrap
-filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
-set autoindent
-set expandtab
-
-" Visual
-"=========================
-set nu
-set relativenumber
-set cursorline
-set nohls
-set noeb
-set vb
-set showcmd
-set scrolloff=12
-set nuw=6
-
 " Maps
 "=========================
 
@@ -87,7 +48,73 @@ let mapleader = ','
 nnoremap <S-O> o<Esc>
 
 " NERDtree
+" ------------------------------------------------------------------------------------
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
+" VimWiki
+" ------------------------------------------------------------------------------------
+
+" Open Firefox
+" ----------------
+" To open Ubuntu browser via external alias command
+" nmap gx :!fire <c-r><c-a>
+" To open Windows browser via internal alias command
+:command -nargs=1 Fire :!/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe <args>
+":command -nargs=1 FirePdf :!/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe <args> 
+
+" Openning URL
+" ----------------
+" Key-map to visual grab inside and open in Windows browser
+" map <leader>of <Esc>:Fire <c-r>"
+map <leader>ou vi(y<Esc>:Fire <c-r>"<CR>
+
+" Openning PDF inside my vimwiki dwc-notes
+" ----------------
+" Key-map to open PDFs
+" map <silent> <leader>go vi(y<Esc>:!(evince ;<c-r><s-'><CR>;&)
+" map <leader>go vi(y<Esc>:!evince <c-r>" &
+map <leader>op vi(y<Esc>:Fire file://///wsl$/Ubuntu-22.04/home/dom/dwc-notes/<c-r>"<CR>
+
+" vimwiki 
+set nocompatible
+filetype plugin on
+syntax on"
+"    :Vimwiki2HTML -- Convert current wiki link to HTML.
+"    :VimwikiAll2HTML -- Convert all your wiki links to HTML.
+"    :help vimwiki-commands -- List all commands.
+"    :help vimwiki -- General vimwiki help docs.
+let g:vimwiki_list = [{'path': '~/dwc-notes', 'template_path': '~/dwc-notes/templates/',
+          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.md',
+          \ 'path_html': '~/dwc-notes/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
+          \ 'html_filename_parameterization': 1,
+          \ 'template_ext': '.tpl'}]
+" set autosave wiki buffer to off
+let g:vimwiki_autowriteall = 0
+
+" command gx to open urls, custom browser viewer
+let g:netrw_browsex_viewer = "falkon"
+
+
+" Syntax
+"=========================
+set nowrap
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set expandtab
+
+" Visual
+"=========================
+set wmnu " wildmenu
+set nu
+set relativenumber
+set cursorline
+set nohls
+set noeb
+set vb
+set showcmd
+set scrolloff=12
+set nuw=6

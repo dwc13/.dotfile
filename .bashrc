@@ -143,14 +143,6 @@ PS1="$brk\n=============================================\n$tc
 $tc[\A] $txtgrn\u$tc: $txtcyn\w$tc $ "
 
 #=====================================================================
-#			FUNCTIONS	
-#=====================================================================
-
-function mkcd () {
-	mkdir -p $1 && cd $1
-}
-
-#=====================================================================
 #		 SOURCE	
 #=====================================================================
 
@@ -189,6 +181,35 @@ alias stat="git status"
 alias gc="git commit -m "$1""
 alias gl="git log --reverse"
 alias py="python $@"
+alias notes="cd ~/dwc-notes && vim ./index.md"
+# alias ghost="ghostscript "$1""
+alias fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
+alias vr="vim ~/.vimrc"
+alias br="vim ~/.bashrc"
+alias ppwd="pwd -P"
+alias ppwd-e="echo 'Physical Directory: $(ppwd)'"
 
+#=====================================================================
+#			FUNCTIONS	
+#=====================================================================
 
+function mkcd () {
+	mkdir -p $1 && cd $1
+}
+
+# To Open PDF in Window's Firefox
+# alias wsl-pdf="fire file://///wsl$/Ubuntu-22.04/home/dom/"$1""
+# alias wsl-pdf="fire file://///wsl$/Ubuntu-22.04/$(ppwd)/"$1""
+function wsl-pdf () {
+    echo "Attempting to open file in Windows Firefox: path > file://///wsl$/Ubuntu-22.04$(ppwd)/$1"
+    $(fire file://///wsl$/Ubuntu-22.04/$(ppwd)/$1)
+}
+
+# To Open Notes in Window's Firefox
+# alias wnotes="cd ~/dwc-notes/site_html && falkon ./index.html &"
+# alias wnotes="cd ~/dwc-notes/site_html && /mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe $(ppwd)/index.html"
+function wnotes () {
+    echo "Attempting to open notes in Window's Firefox.\nPath > file://///wsl$/Ubuntu-22.04/home/dom/dwc-notes/site_html/index.html"
+    $(fire file://///wsl$/Ubuntu-22.04/home/dom/dwc-notes/site_html/index.html)
+}
 
