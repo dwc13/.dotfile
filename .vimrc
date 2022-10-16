@@ -43,6 +43,10 @@ let mapleader = ','
 "    <Backspace> -- Go back to parent(previous) wiki link.
 "    <Tab> -- Find next wiki link.
 "    <Shift-Tab> -- Find previous wiki link.
+command WVW :w | VimwikiAll2HTML
+
+" Command to build current .tex file
+command TEX :w | !pdflatex %<CR>
 
 "Shift + 'o' for new line 
 nnoremap <S-O> o<Esc>
