@@ -44,6 +44,8 @@ let mapleader = ','
 "    <Tab> -- Find next wiki link.
 "    <Shift-Tab> -- Find previous wiki link.
 command WVW :w | VimwikiAll2HTML
+command CopyPDFsinNotes :!rm -r ~/dwc-notes/site_html/pdfs/ && cp -al ~/dwc-notes/pdfs/ ~/dwc-notes/site_html/pdfs/
+
 
 " Command to build current .tex file
 command TEX :w | !pdflatex %<CR>
@@ -79,7 +81,7 @@ map <leader>ou vi(y<Esc>:Fire <c-r>"<CR>
 " Key-map to open PDFs
 " map <silent> <leader>go vi(y<Esc>:!(evince ;<c-r><s-'><CR>;&)
 " map <leader>go vi(y<Esc>:!evince <c-r>" &
-map <leader>op vi(y<Esc>:Fire file://///wsl$/Ubuntu-22.04/home/dom/dwc-notes/<c-r>"<CR>
+map <leader>op f(9lvt)y<Esc>:Fire file://///wsl$/Ubuntu-22.04/home/dom/dwc-notes/pdfs/<c-r>"
 
 " vimwiki 
 set nocompatible
@@ -99,6 +101,9 @@ let g:vimwiki_autowriteall = 0
 
 " command gx to open urls, custom browser viewer
 let g:netrw_browsex_viewer = "falkon"
+
+" Append for find command
+set path+=**/
 
 
 " Syntax
