@@ -201,9 +201,10 @@ alias gl="git log --reverse"
 # ------------
 # alias note="vim ./$(date +%d-%m-%y)-notes.md"
 # alias notes="cd ~/dwc-notes && vim ./index.md"
-alias notes="cd /mnt/z/notes && obsidian"
-alias notes="cd /mnt/z/notes && obsidian"
+# alias notes="cd /mnt/z/notes && obsidian"
+alias notes="cd /mnt/z/notes && vim ."
 # alias fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
+alias edge="/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe"
 
 #=====================================================================
 #			FUNCTIONS	
