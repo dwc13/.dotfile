@@ -7,6 +7,8 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo apt install -y vim ruby-full build-essential zlib1g-dev neofetch
+# sudo apt install flatpak
+# sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 for a in {1..35}; do echo -n =; done
 echo -e "\nInstalling GEMs -> vimwiki_markdown jekyll bundler"
@@ -20,12 +22,6 @@ for a in {1..35}; do echo -n =; done
 echo -e "\nInstall Docker Desktop by going to https://docs.docker.com/desktop/linux/install/ubuntu/"
 echo -e "\tMake sure to install Docker's package repository and install latest release."
 echo "Install Kasm by going to https://kasmweb.com/docs/latest/install.html"
-
-# Install Flatpak
-# for a in {1..35}; do echo -n =; done
-# echo "\nInstalling flatpak with flathub remote"
-# apt install -y flatpak
-# flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 for a in {1..35}; do echo -n =; done
 echo -e "\nGenerating Symbolic Links:"
@@ -67,6 +63,19 @@ if [ -f "$FILE_GIT" ]; then {
 else {
 	ln -s $(pwd)/.gitconfig $FILE_GIT
 	echo "Linked $FILE_GIT"
+}
+fi	
+
+FILE_NEO="/home/dom/.config/neofetch/config.conf"
+echo -e "======= Neofetch Config Link ======="
+if [ -f "$FILE_NEO" ]; then {
+	rm $FILE_NEO
+    ln -s $(pwd)/neo.conf $FILE_NEO
+    echo "Deleted and Relinked Neofetch conf"
+}
+else {
+    ln -s $(pwd)/neo.conf $FILE_NEO
+	echo "Linked Neofetch conf"
 }
 fi	
 

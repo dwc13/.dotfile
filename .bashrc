@@ -136,10 +136,7 @@ brk='\[\e[1;33m\]'
 LS_COLORS=$LS_COLORS:'di=1;32:fi=0;36:ln=0;97:' ; export LS_COLORS
 
 neofetch
-echo -e "\n=============================================\n"
-echo -e "\tIPs: $(hostname -I)"
-
-PS1="$brk$tc$tc[\A] $txtgrn\u$tc: $txtcyn\w$tc $ "
+# echo -e "\tIPs: $(hostname -I)"
 
 #=====================================================================
 #		 SOURCE	
@@ -157,6 +154,7 @@ else
 	echo -e "\tDid not source ROS for $CODENAME"
 fi
 
+echo -e "=============================================\n"
 #=====================================================================
 #			EXPORTS	
 #=====================================================================
@@ -164,32 +162,48 @@ fi
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
+export EDITOR="vim"
 
 if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
 	export LIBGL_ALWAYS_INDIRECT=0
 	export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
 fi
 
+# ISSUE DBUS when openning some programs
+# ------------
+# Found dbus error fix on WSL GitHub https://github.com/microsoft/WSL/issues/7915
+# ------------
+# export DISPLAY=$(hostname -I):0
+service dbus start
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+# sudo mkdir $XDG_RUNTIME_DIR
+chmod 700 $XDG_RUNTIME_DIR
+chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
+export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
+dbus-daemon --session --address=$DBUS_SESSION_BUS_ADDRESS --nofork --nopidfile --syslog-only &
+
 #=====================================================================
 #			ALIASES	
 #=====================================================================
 
 alias l="ls -la"
-alias of="nautilus $@ &"
-# alias bud="sudo tar -cvpzf /mnt/big-drive/backup-$(date +%d-%m-%y).tar.gz --one-file-system /mnt/nvme-drive"
-# alias rest="sudo tar -xvpzf $@ -C /mnt/nvme-drive --numeric-owner" 
-alias note="vim ./$(date +%d-%m-%y)-notes.md"
+alias py="python $@"
+alias vr="vim ~/.vimrc"
+alias br="vim ~/.bashrc"
+
+# GIT
+# ------------
 alias stat="git status"
 alias gc="git commit -m "$1""
 alias gl="git log --reverse"
-alias py="python $@"
-alias notes="cd ~/dwc-notes && vim ./index.md"
-# alias ghost="ghostscript "$1""
-alias fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
-alias vr="vim ~/.vimrc"
-alias br="vim ~/.bashrc"
-alias ppwd="pwd -P"
-alias ppwd-e="echo 'Physical Directory: $(ppwd)'"
+
+# NOTES
+# ------------
+# alias note="vim ./$(date +%d-%m-%y)-notes.md"
+# alias notes="cd ~/dwc-notes && vim ./index.md"
+alias notes="cd /mnt/z/notes && obsidian"
+alias notes="cd /mnt/z/notes && obsidian"
+# alias fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
 
 #=====================================================================
 #			FUNCTIONS	
@@ -202,16 +216,21 @@ function mkcd () {
 # To Open PDF in Window's Firefox
 # alias wsl-pdf="fire file://///wsl$/Ubuntu-22.04/home/dom/"$1""
 # alias wsl-pdf="fire file://///wsl$/Ubuntu-22.04/$(ppwd)/"$1""
-function wsl-pdf () {
-    echo "Attempting to open file in Windows Firefox: path > file://///wsl$/Ubuntu-$(lsb_release -rs)$(ppwd)/$1"
-    $(fire file://///wsl$/Ubuntu-$(lsb_release -rs)/$(ppwd)/$1)
-}
+# function wsl-pdf () {
+#     echo "Attempting to open file in Windows Firefox: path > file://///wsl$/Ubuntu-$(lsb_release -rs)$(ppwd)/$1"
+#     $(fire file://///wsl$/Ubuntu-$(lsb_release -rs)/$(ppwd)/$1)
+# }
 
 # To Open Notes in Window's Firefox
 # alias wnotes="cd ~/dwc-notes/site_html && falkon ./index.html &"
 # alias wnotes="cd ~/dwc-notes/site_html && /mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe $(ppwd)/index.html"
-function wnotes () {
-    echo "Attempting to open notes in Window's Firefox.\nPath > file://///wsl$/Ubuntu-$(lsb_release -rs)/home/dom/dwc-notes/site_html/index.html"
-    $(fire file://///wsl$/Ubuntu-$(lsb_release -rs)/home/dom/dwc-notes/site_html/index.html)
-}
+# function wnotes () {
+#     echo "Attempting to open notes in Window's Firefox.\nPath > file://///wsl$/Ubuntu-$(lsb_release -rs)/home/dom/dwc-notes/site_html/index.html"
+#     $(fire file://///wsl$/Ubuntu-$(lsb_release -rs)/home/dom/dwc-notes/site_html/index.html)
+# }
 
+#=====================================================================
+#		    START PS	
+#=====================================================================
+
+PS1="$tc[\A] $brk\u$tc: $txtcyn\w$tc $ "
