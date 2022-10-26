@@ -17,8 +17,10 @@ Plug 'vim-airline/vim-airline-themes' " vim status bar themes
 " Markdown-preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-" Vim Markdown
+" Tablulate my code
 Plug 'godlygeek/tabular'
+
+" Vim Markdown
 Plug 'preservim/vim-markdown'
 
 " Limelight Focusing Viewing on Code Block
@@ -94,12 +96,13 @@ map <leader>ou vi(y<Esc>:Fire <c-r>"<CR>
 
 " Open PDF: Key-map to open PDFs in Window's Firefox
 " ------------------------------------------------
-map <leader>op vi(y<Esc>:Fire file:/<c-r>"
+" map <leader>op vi(y<Esc>:Fire file:/<c-r>"
+map <leader>np vi(y<Esc>:Fire file:///Z:/notes/<c-r>"<CR>
 
 " Open Markdown: Command and Key-map to open MD in a new buffer
 " ------------------------------------------------
 command -nargs=1 OpenMD :ed /mnt/z/notes/<args>
-nnoremap <leader>bo vi(y<ESC>:OpenMD <c-r>"<CR>
+nnoremap <leader>no vi(y<ESC>:OpenMD <c-r>"<CR>
 
 " Markdown-Preview: Open Markdown Preview
 " ------------------------------------------------
@@ -114,6 +117,11 @@ nnoremap <leader>t :TEX<CR>
 " ------------------------------------------------
 " map <leader>pw :!pandoc -f markdown -t html -s -o \*.html
 " map <leader>pw :!for file in $(find . -iname "*.md"); do pandoc --from markdown --to html ${file} -o "site_html/${file%md}html"; done
+
+" Custom Snippets
+" ------------------------------------------------
+nnoremap <leader>sp :-1read $HOME/.dotfile/snippets/paper-notes-temp.md<CR>
+nnoremap <leader>sm :-1read $HOME/.dotfile/snippets/meetings-temp.md<CR>
 
 "==================================================
 " Setting
@@ -136,6 +144,7 @@ let g:mkdp_browser = "firefox"
 
 " custom markdown style
 let g:mkdp_markdown_css = "/home/dom/.dotfile/markdown.css"
+let g:vim_markdown_new_list_item_indent = 0
 
 "==================================================
 " Syntax
@@ -144,7 +153,7 @@ set nowrap
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
-set autoindent
+" set autoindent
 set expandtab
 
 "==================================================

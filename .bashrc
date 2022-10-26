@@ -169,18 +169,6 @@ if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
 	export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
 fi
 
-# ISSUE DBUS when openning some programs
-# ------------
-# Found dbus error fix on WSL GitHub https://github.com/microsoft/WSL/issues/7915
-# ------------
-# export DISPLAY=$(hostname -I):0
-service dbus start
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
-# sudo mkdir $XDG_RUNTIME_DIR
-chmod 700 $XDG_RUNTIME_DIR
-chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
-export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
-dbus-daemon --session --address=$DBUS_SESSION_BUS_ADDRESS --nofork --nopidfile --syslog-only &
 
 #=====================================================================
 #			ALIASES	
@@ -212,6 +200,20 @@ alias edge="/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe
 
 function mkcd () {
 	mkdir -p $1 && cd $1
+}
+
+# ISSUE DBUS when openning some programs
+# ------------
+# Found dbus error fix on WSL GitHub https://github.com/microsoft/WSL/issues/7915
+function export_dbus () {
+    # export DISPLAY=$(hostname -I):0
+    service dbus start
+    export XDG_RUNTIME_DIR=/run/user/$(id -u)
+    sudo mkdir $XDG_RUNTIME_DIR
+    sudo chmod 700 $XDG_RUNTIME_DIR
+    sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
+    export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
+    dbus-daemon --session --address=$DBUS_SESSION_BUS_ADDRESS --nofork --nopidfile --syslog-only &
 }
 
 # To Open PDF in Window's Firefox
