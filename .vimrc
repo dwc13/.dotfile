@@ -97,12 +97,19 @@ map <leader>ou vi(y<Esc>:Fire <c-r>"<CR>
 " Open PDF: Key-map to open PDFs in Window's Firefox
 " ------------------------------------------------
 " map <leader>op vi(y<Esc>:Fire file:/<c-r>"
-map <leader>np vi(y<Esc>:Fire file:///Z:/notes/<c-r>"<CR>
+map <leader>op vi(y<Esc>:Fire file:///Z:/notes/<c-r>"<CR>
+
+" Open Markdown: Command and Key-map to open MD 
+" ------------------------------------------------
+" Open in new buffer
+command -nargs=1 OpenMD :ed /mnt/z/notes/<args>
+nnoremap <leader>om vi(y<ESC>:OpenMD <c-r>"<CR>
+" Open in Firefox
+nnoremap <leader>of :Fire file:///Z:/notes/%<CR><CR>
 
 " Open Markdown: Command and Key-map to open MD in a new buffer
 " ------------------------------------------------
-command -nargs=1 OpenMD :ed /mnt/z/notes/<args>
-nnoremap <leader>no vi(y<ESC>:OpenMD <c-r>"<CR>
+" command Obsidian :!/mnt/c/Users/carri/AppData/Local/Obsidian/Obsidian.exe
 
 " Markdown-Preview: Open Markdown Preview
 " ------------------------------------------------
@@ -110,8 +117,9 @@ map <leader>mp :MarkdownPreview<CR>
 
 " LaTex Command: Command and Key-map to build current .tex file to PDF
 " ------------------------------------------------
-command TEX :w | !pdflatex %<CR>
-nnoremap <leader>t :TEX<CR>
+command -nargs=1 TEX :w | !pdflatex -jobname=<args> % && rm -r ./*.log ./*.aux ./*.out
+nnoremap <leader>tr :TEX <c-r>=strftime('%Y%m%d')<CR>-DCarrillo-resume
+" nnoremap <leader>tf :TEX %
 
 " Pandoc: Converting all .md file to .html
 " ------------------------------------------------
@@ -122,6 +130,8 @@ nnoremap <leader>t :TEX<CR>
 " ------------------------------------------------
 nnoremap <leader>sp :-1read $HOME/.dotfile/snippets/paper-notes-temp.md<CR>
 nnoremap <leader>sm :-1read $HOME/.dotfile/snippets/meetings-temp.md<CR>
+nnoremap <leader>sd :-1read $HOME/.dotfile/snippets/definition-temp.md<CR>
+nnoremap <leader>sa :-1read $HOME/.dotfile/snippets/author-temp.md<CR>
 
 "==================================================
 " Setting
