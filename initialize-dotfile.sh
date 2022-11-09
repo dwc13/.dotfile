@@ -6,7 +6,7 @@ for a in {1..35}; do echo -n =; done
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
-sudo apt install -y vim ruby-full build-essential zlib1g-dev neofetch
+sudo apt install -y vim ruby-full build-essential zlib1g-dev neofetch curl
 # sudo apt install flatpak
 # sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
