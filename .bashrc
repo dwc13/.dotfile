@@ -136,18 +136,17 @@ brk='\[\e[1;33m\]'
 LS_COLORS=$LS_COLORS:'di=1;32:fi=0;36:ln=0;97:' ; export LS_COLORS
 
 neofetch
-# echo -e "\tIPs: $(hostname -I)"
 
+CODENAME=$(lsb_release -cs)
 #=====================================================================
 #		 SOURCE	
 #=====================================================================
 
-CODENAME=$(lsb_release -cs)
 # echo -e "\tCurrent Distribution: $CODENAME"
-if [ "$CODENAME" == 'bionic' ]; then
+if [ "$CODENAME" == 'bionic' ] && [ "$WSL_DISTRO_NAME" == 'Ubuntu-18.04' ]; then
 	echo -e "\tSourcing ROS Melodic"
 	source /opt/ros/melodic/setup.bash
-elif [ "$CODENAME" == 'focal' ]; then
+elif [ "$CODENAME" == 'focal' ] && [ "$WSL_DISTRO_NAME" == 'Ubuntu-20.04' ]; then
 	echo -e "\tSourcing ROS Noetic"
 	source /opt/ros/noetic/setup.bash
 else
@@ -155,6 +154,7 @@ else
 fi
 
 echo -e "=============================================\n"
+
 #=====================================================================
 #			EXPORTS	
 #=====================================================================
@@ -169,6 +169,10 @@ if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
 	export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
 fi
 
+if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
+    export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
 
 #=====================================================================
 #			ALIASES	

@@ -6,27 +6,46 @@ for a in {1..35}; do echo -n =; done
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
-sudo apt install -y vim ruby-full build-essential zlib1g-dev neofetch curl
+
+sudo apt install -y neofetch curl
+
+# FOR JEKYLL UNCOMMENT LINE BELOW
+# ================================================================
+# sudo apt install -y ruby-full build-essential zlib1g-dev
+
+
+# FOR FLATPAK APPS
+# ================================================================
 # sudo apt install flatpak
 # sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-for a in {1..35}; do echo -n =; done
-echo -e "\nInstalling GEMs -> vimwiki_markdown jekyll bundler"
-sudo gem install --silent vimwiki_markdown jekyll bundler
 
+# ================================================================
+# for a in {1..35}; do echo -n =; done
+# echo -e "\nInstalling GEMs -> vimwiki_markdown jekyll bundler"
+# sudo gem install --silent vimwiki_markdown jekyll bundler
+
+
+# ================================================================
 for a in {1..35}; do echo -n =; done
 echo -e "\nRunning curl for vim-plug, make sure to run :PlugInstall in vim\n"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+
+# ================================================================
 for a in {1..35}; do echo -n =; done
 echo -e "\nInstall Docker Desktop by going to https://docs.docker.com/desktop/linux/install/ubuntu/"
 echo -e "\tMake sure to install Docker's package repository and install latest release."
 echo "Install Kasm by going to https://kasmweb.com/docs/latest/install.html"
 
+
+# ================================================================
 for a in {1..35}; do echo -n =; done
 echo -e "\nGenerating Symbolic Links:"
 for a in {1..35}; do echo -n =; done
 
+
+# ================================================================
 FILE_VIM="/home/dom/.vimrc"
 echo -e "\n======= Vimrc Link ======="
 if [ -f "$FILE_VIM" ]; then {
@@ -40,6 +59,8 @@ else {
 }
 fi	
 
+
+# ================================================================
 FILE_BASH="/home/dom/.bashrc"
 echo -e "======= Bashrc Link ======="
 if [ -f "$FILE_BASH" ]; then {
@@ -53,6 +74,8 @@ else {
 }
 fi	
 
+
+# ================================================================
 FILE_GIT="/home/dom/.gitconfig"
 echo -e "======= Git Config Link ======="
 if [ -f "$FILE_GIT" ]; then {
@@ -66,17 +89,30 @@ else {
 }
 fi	
 
+
+# ================================================================
 FILE_NEO="/home/dom/.config/neofetch/config.conf"
 echo -e "======= Neofetch Config Link ======="
-if [ -f "$FILE_NEO" ]; then {
-	rm $FILE_NEO
+if [ -d "/home/dom/.config/neofetch" ]; then 
+    # DIRECTORY EXISTS
+    if [ -f "$FILE_NEO" ]; then {
+        rm $FILE_NEO
+        ln -s $(pwd)/neo.conf $FILE_NEO
+        echo "Deleted and Relinked Neofetch conf"
+    }
+    else {
+        ln -s $(pwd)/neo.conf $FILE_NEO
+        echo "Linked Neofetch conf"
+    }
+    fi
+else 
+    # DIRECTORY DOES NOT EXIST
+    mkdir -p /home/dom/.config/neofetch
     ln -s $(pwd)/neo.conf $FILE_NEO
-    echo "Deleted and Relinked Neofetch conf"
-}
-else {
-    ln -s $(pwd)/neo.conf $FILE_NEO
-	echo "Linked Neofetch conf"
-}
+    echo "Linked Neofetch conf"
 fi	
 
+
+# ================================================================
 source $FILE_BASH
+# ================================================================
