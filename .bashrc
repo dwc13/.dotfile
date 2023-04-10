@@ -143,22 +143,19 @@ CODENAME=$(lsb_release -cs)
 #=====================================================================
 
 # echo -e "\tCurrent Distribution: $CODENAME"
-if [ "$CODENAME" == 'bionic' ] && [ "$WSL_DISTRO_NAME" == 'Ubuntu-18.04' ]; then
-	echo -e "\tSourcing ROS Melodic"
-	source /opt/ros/melodic/setup.bash
-elif [ "$CODENAME" == 'focal' ] && [ "$WSL_DISTRO_NAME" == 'Ubuntu-20.04' ]; then
-	echo -e "\tSourcing ROS Noetic"
-	source /opt/ros/noetic/setup.bash
-else
-	echo -e "\tDid not source ROS for $CODENAME"
-fi
-
-echo -e "=============================================\n"
+# if [ "$CODENAME" == 'bionic' ] && [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
+#     echo -e "\tSourcing ROS Melodic"
+#     source /opt/ros/melodic/setup.bash
+# else
+# 	echo -e "\tDid not source ROS for $CODENAME"
+# fi
+# echo -e "=============================================\n"
 
 #=====================================================================
 #			EXPORTS	
 #=====================================================================
 
+# Export for Jekyll
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
@@ -169,17 +166,34 @@ if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
 	export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
 fi
 
-if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
-    export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
-    export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-fi
+function cuda117 () {
+    if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
+        echo 'Source CUDA 11.7 for OpenPCDet'
+        export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
+        export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+        export CUDA_HOME=/usr/local/cuda-11.7
+    fi
+}
+function cuda111 () {
+    if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
+        echo 'Source CUDA 11.1 for OpenPCDet'
+        export PATH=/usr/local/cuda-11.1/bin${PATH:+:${PATH}}
+        export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+        export CUDA_HOME=/usr/local/cuda-11.1
+    fi
+}
+function numbacuda() {
+    if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
+        export LD_LIBRARY_PATH="/usr/lib/wsl/lib/"
+        export NUMBA_CUDA_DRIVER="/usr/lib/wsl/lib/libcuda.so.1"
+    fi
+}
 
 #=====================================================================
 #			ALIASES	
 #=====================================================================
 
 alias l="ls -la"
-alias py="python $@"
 alias vr="vim ~/.vimrc"
 alias br="vim ~/.bashrc"
 
@@ -194,9 +208,9 @@ alias gl="git log --reverse"
 # alias note="vim ./$(date +%d-%m-%y)-notes.md"
 # alias notes="cd ~/dwc-notes && vim ./index.md"
 # alias notes="cd /mnt/z/notes && obsidian"
-alias notes="cd /mnt/z/notes && vim ."
+# alias notes="cd /mnt/z/notes && vim ."
 # alias fire="/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe"
-alias edge="/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe"
+# alias edge="/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe"
 
 #=====================================================================
 #			FUNCTIONS	
@@ -209,16 +223,16 @@ function mkcd () {
 # ISSUE DBUS when openning some programs
 # ------------
 # Found dbus error fix on WSL GitHub https://github.com/microsoft/WSL/issues/7915
-function export_dbus () {
-    # export DISPLAY=$(hostname -I):0
-    service dbus start
-    export XDG_RUNTIME_DIR=/run/user/$(id -u)
-    sudo mkdir $XDG_RUNTIME_DIR
-    sudo chmod 700 $XDG_RUNTIME_DIR
-    sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
-    export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
-    dbus-daemon --session --address=$DBUS_SESSION_BUS_ADDRESS --nofork --nopidfile --syslog-only &
-}
+# function export_dbus () {
+#     # export DISPLAY=$(hostname -I):0
+#     service dbus start
+#     export XDG_RUNTIME_DIR=/run/user/$(id -u)
+#     sudo mkdir $XDG_RUNTIME_DIR
+#     sudo chmod 700 $XDG_RUNTIME_DIR
+#     sudo chown $(id -un):$(id -gn) $XDG_RUNTIME_DIR
+#     export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
+#     dbus-daemon --session --address=$DBUS_SESSION_BUS_ADDRESS --nofork --nopidfile --syslog-only &
+# }
 
 # To Open PDF in Window's Firefox
 # alias wsl-pdf="fire file://///wsl$/Ubuntu-22.04/home/dom/"$1""
@@ -237,7 +251,29 @@ function export_dbus () {
 # }
 
 #=====================================================================
+#		    ANACONDA SETUP
+#=====================================================================
+
+if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/home/dom/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/home/dom/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/dom/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/dom/anaconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+fi
+    # <<< conda initialize <<<
+
+#=====================================================================
 #		    START PS	
 #=====================================================================
 
 PS1="$tc[\A] $brk\u$tc: $txtcyn\w$tc $ "
+

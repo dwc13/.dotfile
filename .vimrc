@@ -71,6 +71,14 @@ nnoremap <leader>v <C-v>
 " New line 
 nnoremap <S-O> o<Esc>
 
+" Move line Up or Down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
 " Buffer Key-maps: More information https://mkaz.blog/working-with-vim/buffers/
 " ------------------------------------------------
 " Write and delete buffer
