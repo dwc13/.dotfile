@@ -14,12 +14,6 @@ sudo apt install -y neofetch curl
 # sudo apt install -y ruby-full build-essential zlib1g-dev
 
 
-# FOR FLATPAK APPS
-# ================================================================
-# sudo apt install flatpak
-# sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-
 # ================================================================
 # for a in {1..35}; do echo -n =; done
 # echo -e "\nInstalling GEMs -> vimwiki_markdown jekyll bundler"
@@ -27,16 +21,9 @@ sudo apt install -y neofetch curl
 
 
 # ================================================================
-for a in {1..35}; do echo -n =; done
-echo -e "\nRunning curl for vim-plug, make sure to run :PlugInstall in vim\n"
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-
-# ================================================================
-for a in {1..35}; do echo -n =; done
-echo -e "\nInstall Docker Desktop by going to https://docs.docker.com/desktop/linux/install/ubuntu/"
-echo -e "\tMake sure to install Docker's package repository and install latest release."
-echo "Install Kasm by going to https://kasmweb.com/docs/latest/install.html"
+# for a in {1..35}; do echo -n =; done
+# echo -e "\nRunning curl for vim-plug, make sure to run :PlugInstall in vim\n"
+# curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
 # ================================================================
