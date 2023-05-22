@@ -155,9 +155,6 @@ CODENAME=$(lsb_release -cs)
 #			EXPORTS	
 #=====================================================================
 
-# Export for Jekyll
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
 
 export EDITOR="vim"
 
@@ -167,26 +164,45 @@ if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
 fi
 
 function cuda117 () {
-    if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
-        echo 'Source CUDA 11.7 for OpenPCDet'
-        export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
-        export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-        export CUDA_HOME=/usr/local/cuda-11.7
-    fi
+  echo 'Source CUDA 11.7 for OpenPCDet'
+  export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
+  export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+  export CUDA_HOME=/usr/local/cuda-11.7
 }
 function cuda111 () {
-    if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
-        echo 'Source CUDA 11.1 for OpenPCDet'
-        export PATH=/usr/local/cuda-11.1/bin${PATH:+:${PATH}}
-        export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-        export CUDA_HOME=/usr/local/cuda-11.1
-    fi
+  echo 'Source CUDA 11.1 for OpenPCDet'
+  export PATH=/usr/local/cuda-11.1/bin${PATH:+:${PATH}}
+  export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+  export CUDA_HOME=/usr/local/cuda-11.1
 }
 function numbacuda() {
-    if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
-        export LD_LIBRARY_PATH="/usr/lib/wsl/lib/"
-        export NUMBA_CUDA_DRIVER="/usr/lib/wsl/lib/libcuda.so.1"
-    fi
+  export LD_LIBRARY_PATH="/usr/lib/wsl/lib/"
+  export NUMBA_CUDA_DRIVER="/usr/lib/wsl/lib/libcuda.so.1"
+}
+function hype() {
+    source activate vc2
+    echo 'Activated Conda Environment'
+
+    export PATH=/usr/local/cuda-11.1/bin${PATH:+:${PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+    export CUDA_HOME=/usr/local/cuda-11.1
+    echo 'Sourced CUDA 11.1 libraries'
+
+    export LD_LIBRARY_PATH="/usr/lib/wsl/lib/"
+    export NUMBA_CUDA_DRIVER="/usr/lib/wsl/lib/libcuda.so.1"
+    echo 'Setup NUMBA CUDA libraries'
+
+    cd ~/HybridCP/
+}
+function jek() {
+    # source activate website
+    # echo  'Activate Conda Environment'
+    cd $HOME/dwc13.github.io
+
+    # Ruby Gems install to ~/gems
+    export GEM_HOME="$HOME/gems"
+    export PATH="$HOME/gemsbin:$PATH"
+    echo  'Export GEM Paths'
 }
 
 #=====================================================================
@@ -217,7 +233,7 @@ alias gl="git log --reverse"
 #=====================================================================
 
 function mkcd () {
-	mkdir -p $1 && cd $1
+    mkdir -p $1 && cd $1
 }
 
 # ISSUE DBUS when openning some programs

@@ -24,10 +24,13 @@ Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
 
 " Limelight Focusing Viewing on Code Block
-Plug 'junegunn/limelight.vim'
+" Plug 'junegunn/limelight.vim'
 
 " Goyo Focusing Viewing on File
-Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/goyo.vim'
+
+" VIM WHICH KEY
+Plug 'liuchengxu/vim-which-key'
 
 call plug#end()
 
@@ -93,6 +96,11 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+" Vim Which Key
+" ------------------------------------------------
+nnoremap <silent> <leader> :WhichKey ','<CR>
+set timeoutlen=500
 
 " Firefox Command: Open Window's Firefox 
 " ------------------------------------------------
