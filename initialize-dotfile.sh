@@ -21,9 +21,9 @@ sudo apt install -y neofetch curl
 
 
 # ================================================================
-# for a in {1..35}; do echo -n =; done
-# echo -e "\nRunning curl for vim-plug, make sure to run :PlugInstall in vim\n"
-# curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+for a in {1..35}; do echo -n =; done
+echo -e "\nRunning curl for vim-plug, make sure to run :PlugInstall in vim\n"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
 # ================================================================
