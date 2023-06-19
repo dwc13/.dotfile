@@ -164,13 +164,13 @@ if [ "$CODENAME" == 'melodic' ] || [ "$CODENAME" == 'bionic' ]; then
 fi
 
 function cuda117 () {
-  echo 'Source CUDA 11.7 for OpenPCDet'
+  echo 'Sourced CUDA 11.7 libraries'
   export PATH=/usr/local/cuda-11.7/bin${PATH:+:${PATH}}
   export LD_LIBRARY_PATH=/usr/local/cuda-11.7/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
   export CUDA_HOME=/usr/local/cuda-11.7
 }
 function cuda111 () {
-  echo 'Source CUDA 11.1 for OpenPCDet'
+  echo 'Sourced CUDA 11.1 libraries'
   export PATH=/usr/local/cuda-11.1/bin${PATH:+:${PATH}}
   export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
   export CUDA_HOME=/usr/local/cuda-11.1
@@ -183,14 +183,19 @@ function hype() {
     source activate vc2
     echo 'Activated Conda Environment'
 
-    export PATH=/usr/local/cuda-11.1/bin${PATH:+:${PATH}}
-    export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-    export CUDA_HOME=/usr/local/cuda-11.1
-    echo 'Sourced CUDA 11.1 libraries'
+    cuda111
 
-    export LD_LIBRARY_PATH="/usr/lib/wsl/lib/"
-    export NUMBA_CUDA_DRIVER="/usr/lib/wsl/lib/libcuda.so.1"
+    numbacuda
     echo 'Setup NUMBA CUDA libraries'
+
+    # Exports for OpenGl for me to be able to use Open3d Visualization Tools
+    # References:
+        # https://github.com/isl-org/Open3D/issues/4429
+        # https://github.com/isl-org/Open3D/issues/2836
+    export LIBGL_ALWAYS_INDIRECT=0
+    export MESA_GL_VERSION_OVERRIDE=4.5
+    export MESA_GLSL_VERSION_OVERRIDE=450
+    export LIBGL_ALWAYS_SOFTWARE=1
 
     cd ~/HybridCP/
 }
