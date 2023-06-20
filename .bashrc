@@ -179,6 +179,10 @@ function numbacuda() {
   export LD_LIBRARY_PATH="/usr/lib/wsl/lib/"
   export NUMBA_CUDA_DRIVER="/usr/lib/wsl/lib/libcuda.so.1"
 }
+function dnumbacuda() {
+  export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu/"
+  export NUMBA_CUDA_DRIVER="/usr/lib/x86_64-linux-gnu/libcuda.so.1"
+}
 function hype() {
     source activate vc2
     echo 'Activated Conda Environment'
@@ -186,6 +190,26 @@ function hype() {
     cuda111
 
     numbacuda
+    echo 'Setup NUMBA CUDA libraries'
+
+    # Exports for OpenGl for me to be able to use Open3d Visualization Tools
+    # References:
+        # https://github.com/isl-org/Open3D/issues/4429
+        # https://github.com/isl-org/Open3D/issues/2836
+    export LIBGL_ALWAYS_INDIRECT=0
+    export MESA_GL_VERSION_OVERRIDE=4.5
+    export MESA_GLSL_VERSION_OVERRIDE=450
+    export LIBGL_ALWAYS_SOFTWARE=1
+
+    cd ~/HybridCP/
+}
+function dhype() {
+    conda activate vc2
+    echo 'Activated Conda Environment'
+
+    cuda111
+
+    dnumbacuda
     echo 'Setup NUMBA CUDA libraries'
 
     # Exports for OpenGl for me to be able to use Open3d Visualization Tools
@@ -297,4 +321,5 @@ fi
 #=====================================================================
 
 PS1="$tc[\A] $brk\u$tc: $txtcyn\w$tc $ "
+
 
