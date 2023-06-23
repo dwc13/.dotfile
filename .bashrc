@@ -242,6 +242,8 @@ alias l="ls -la"
 alias vr="vim ~/.vimrc"
 alias br="vim ~/.bashrc"
 
+alias tm="~/.dotfile/3wintmux.sh"
+
 # GIT
 # ------------
 alias stat="git status"
@@ -299,22 +301,7 @@ function mkcd () {
 #		    ANACONDA SETUP
 #=====================================================================
 
-if [ "$WSL_DISTRO_NAME" == 'Ubuntu-OpenPCDet' ]; then
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/home/dom/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "/home/dom/anaconda3/etc/profile.d/conda.sh" ]; then
-            . "/home/dom/anaconda3/etc/profile.d/conda.sh"
-        else
-            export PATH="/home/dom/anaconda3/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-fi
-    # <<< conda initialize <<<
+source /home/dom/anaconda3/bin/activate  # commented out by conda initialize
 
 #=====================================================================
 #		    START PS	

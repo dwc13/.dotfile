@@ -7,7 +7,7 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
 
-sudo apt install -y neofetch curl
+sudo apt install -y neofetch curl tmux
 
 # FOR JEKYLL UNCOMMENT LINE BELOW
 # ================================================================
