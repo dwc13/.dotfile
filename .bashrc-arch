@@ -1,0 +1,72 @@
+#=====================================================================
+#			MY BASH FILE
+#=====================================================================
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+shopt -s autocd
+shopt -s histappend
+
+export HISTSIZE=5000
+export HISTFILESIZE=10000
+txtcyn='\[\e[4;36m\]'
+txtgrn='\[\e[4;32m\]'
+txtylw='\e[1;33m'
+bldblu='\[\e[1m\e[4;34m\]'
+tc='\[\e[0m\]'
+brk='\[\e[1;33m\]'
+
+LS_COLORS=$LS_COLORS:'di=1;32:fi=0;36:ln=0;97:' ; export LS_COLORS
+
+###################################
+#	FUNCTIONS
+###################################
+
+# Function for yazi : https://yazi-rs.github.io/docs/quick-start
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# Encryption
+# PDF file
+function enc-pdf(){ pdftk "$1" output "$2" user_pw "$3"; }
+# Any file with GPG
+function enc-any() { gpg -c "$1"; }
+
+# Make and cd in directory
+function mkcd () {
+    mkdir -p $1 && cd $1
+}
+
+###################################
+#	ALIAS
+###################################
+
+alias ls='ls --color=auto'
+alias l='ls -la --color=auto'
+alias grep='grep --color=auto'
+alias vr="vim ~/.vimrc"
+alias br="vim ~/.bashrc"
+
+# GIT
+# ------------
+alias stat="git status"
+alias gc="git commit -m "$1""
+alias gl="git log --reverse"
+
+###################################
+#	EXPORTS	
+###################################
+export EDITOR='vim'
+
+###################################
+screenfetch
+
+PS1="$tc[\A] $brk\u$tc: $txtcyn\w$tc $ "
+#PS1='[\u@\h \W]\$ '

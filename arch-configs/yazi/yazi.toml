@@ -1,0 +1,27 @@
+# yazi.toml
+[manager]
+show_hidden = true
+
+[opener]
+shotwell = [{ run = 'shotwell "$1"', desc = "Open Shotwell image viewer", for = "linux" }]
+evince = [{ run = 'evince "$1"', desc = "Open XDG pdf viewer", for = "linux" }]
+
+[open]
+rules = [
+	{ mime = "text/*", use = "edit" },
+	{ mime = "video/*", use = "play" },
+
+	# { mime = "application/json", use = "edit" },
+	{ name = "*.json", use = "edit" },
+
+	# Multiple openers for a single rule
+	{ name = "*.html", use = [ "open", "edit" ] },
+
+	# Image opener
+	{ name = "*.png", use = "shotwell" },
+	{ name = "*.jpg", use = "shotwell" },
+	{ name = "*.jpeg", use = "shotwell" },
+	
+	# PDF opener
+	{ name = "*.pdf", use = "evince" },
+]
