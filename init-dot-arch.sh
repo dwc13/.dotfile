@@ -84,4 +84,4 @@ else {
 fi	
 source $FILE_BASH
 
-echo -e "MAKE SURE TO MOVE CONFIG FOLDERS FROM .dotfile/arch-configs TO CONFIG DIRECTORY"
+echo -e "MAKE SURE TO MOVE CONFIG FOLDERS FROM .dotfile/arch-config TO CONFIG DIRECTORY"
