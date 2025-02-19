@@ -2,11 +2,27 @@
 
 # UPDATE AND INSTALL PROGRAMS
 # ================================================================
+cd ~
 echo -e "Updating System\n"
 for a in {1..35}; do echo -n =; done
 sudo pacman -Syu
 echo -e "Installing Programs\n"
-sudo pacman -Sy curl tmux git pdftk gnupg discord yazi ffmpeg p7zip jq poppler fd ripgrep fzf zoxide imagemagick vim lazygit
+sudo pacman -Sy curl tmux git pdftk gnupg yazi ffmpeg p7zip \
+    jq poppler fd ripgrep fzf zoxide imagemagick vim lazygit \
+    evince shotwell pdftk screenfetch 
+sudo pacman -S --needed base-devel
+sudo pacman -Sy discord android-studio
+
+# YAY
+# ================================================================
+cd ~
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+yay --version
+cd ~
+
+yay -S tofi
 
 # VIM-PLUG
 # ================================================================

@@ -21,6 +21,7 @@ rules = [
 	{ name = "*.png", use = "shotwell" },
 	{ name = "*.jpg", use = "shotwell" },
 	{ name = "*.jpeg", use = "shotwell" },
+	{ name = "*.gif", use = "shotwell" },
 	
 	# PDF opener
 	{ name = "*.pdf", use = "evince" },
