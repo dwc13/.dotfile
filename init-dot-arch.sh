@@ -9,9 +9,9 @@ sudo pacman -Syu
 echo -e "Installing Programs\n"
 sudo pacman -Sy curl tmux git pdftk gnupg yazi ffmpeg p7zip \
     jq poppler fd ripgrep fzf zoxide imagemagick vim lazygit \
-    evince shotwell pdftk screenfetch 
+    evince shotwell pdftk screenfetch waybar
 sudo pacman -S --needed base-devel
-sudo pacman -Sy discord android-studio
+sudo pacman -Sy discord firefox
 
 # YAY
 # ================================================================
@@ -46,11 +46,11 @@ FILE_VIM="/home/dom/.vimrc"
 echo -e "\n======= Vimrc Link ======="
 if [ -f "$FILE_VIM" ]; then {
 	rm $FILE_VIM
-	ln -s $(pwd)/.vimrc-arch $FILE_VIM
+	ln -s $(pwd)/.dotfile/.vimrc-arch $FILE_VIM
 	echo "Deleted $FILE_VIM and Relinked"
 }
 else {
-	ln -s $(pwd)/.vimrc-arch $FILE_VIM
+	ln -s $(pwd)/.dotfile/.vimrc-arch $FILE_VIM
 	echo "Linked $FILE_VIM"
 }
 fi	
@@ -74,14 +74,16 @@ FILE_BASH="/home/dom/.bashrc"
 echo -e "======= Bashrc Link ======="
 if [ -f "$FILE_BASH" ]; then {
 	rm $FILE_BASH
-	ln -s $(pwd)/.bashrc-arch $FILE_BASH
+	ln -s $(pwd)/.dotfile/.bashrc-arch $FILE_BASH
 	echo "Deleted $FILE_BASH and Relinked"
 }
 else {
-	ln -s $(pwd)/.bashrc-arch $FILE_BASH
+	ln -s $(pwd)/.dotfile/.bashrc-arch $FILE_BASH
 	echo "Linked $FILE_BASH"
 }
 fi	
 source $FILE_BASH
 
-echo -e "MAKE SURE TO MOVE CONFIG FOLDERS FROM .dotfile/arch-config TO CONFIG DIRECTORY"
+echo -e "\nMAKE SURE TO MOVE CONFIG FOLDERS FROM .dotfile/arch-config TO CONFIG DIRECTORY\n"
+echo -e "\nFOR JEKYLL OR ANDROID-STUDIO GOT TO https://developer.android.com/studio\n"
+
