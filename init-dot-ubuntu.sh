@@ -73,14 +73,17 @@ FILE_BASH=".bashrc"
 echo -e "======= Bashrc Link ======="
 if [ -f "$FILE_BASH" ]; then
   {
-    rm $FILE_BASH
-    ln -s $CONFIG_DIR/.bashrc-ubuntu $FILE_BASH
-    echo "Deleted $FILE_BASH and Relinked"
+    # rm $FILE_BASH
+    # ln -s $CONFIG_DIR/.bashrc-ubuntu $FILE_BASH
+    # echo "Deleted $FILE_BASH and Relinked"
+    echo "source ~/.dotfile/.bashrc-ubuntu" >>~/.bashrc
   }
 else
   {
-    ln -s $CONFIG_DIR/.bashrc-ubuntu $FILE_BASH
-    echo "Linked $FILE_BASH"
+    # ln -s $CONFIG_DIR/.bashrc-ubuntu $FILE_BASH
+    # echo "Linked $FILE_BASH"
+    cat /etc/skel/.bashrc >>~/.bashrc
+    echo "source ~/.dotfile/.bashrc-ubuntu" >>~/.bashrc
   }
 fi
 source $FILE_BASH
