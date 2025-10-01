@@ -39,7 +39,7 @@ let g:airline_theme='murmur'
 "==================================================
 
 " Remap Leader Key
-let mapleader = ','
+let mapleader = ' '
 
 " Map Visual-Block, WSL <c-v> is paste
 nnoremap <leader>v <C-v>
