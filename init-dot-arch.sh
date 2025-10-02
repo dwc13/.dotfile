@@ -18,13 +18,13 @@ sudo pacman -Sy curl tmux git yazi tree \
   bitwarden kwallet kwalletmanager kwallet-pam \
   ghostty rofi code \
   networkmanager networkmanager-openconnect openconnect
-sudo pacman -S python3 python-pip
 sudo pacman -S --needed git base-devel yay
 sudo pacman -S linux-headers
 
 git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si
 
-yay -Sy opencode displaylink code-features
+yay -Sy opencode displaylink code-features python-pip python-conda
+# sudo pacman -S python3 python-pip
 
 echo -e "\nGenerating Symbolic Links:"
 linebar
