@@ -32,7 +32,7 @@ CONFIG_DIR="./.dotfile"
 
 ##### GIT CONFIG #####
 FILE_GIT=".gitconfig"
-echo -e "======= Git Config Link ======="
+echo -e "\n======= Git Config Link ======="
 if [ -f "$FILE_GIT" ]; then
   {
     rm $FILE_GIT

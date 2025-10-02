@@ -46,7 +46,7 @@ alias l='ls -la --color=auto'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-alias br='"$EDITOR" ~/.bashrc"
+alias br='"$EDITOR" ~/.bashrc'
 
 alias ta='tmux attach -t "$1"'
 
